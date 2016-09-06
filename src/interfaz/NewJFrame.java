@@ -5,7 +5,9 @@
  */
 package interfaz;
 
+import clases.DenominadorCeroException;
 import clases.Fraccionario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -129,15 +131,18 @@ public class NewJFrame extends javax.swing.JFrame {
         d1 = Integer.parseInt(txtDenominadorUno.getText());
         n2 = Integer.parseInt(txtNumeradorDos.getText());
         d2 = Integer.parseInt(txtDenominadorDos.getText());
-
+        
+        try{
         f1 = new Fraccionario(n1, d1);
         f2 = new Fraccionario(n2, d2);
 
+        
         switch (op) {
             case 0:
                 f3 = f1.sumar(f2);
                 break;
-                
+               
+        
             case 1:
                 f3 = f1.restar(f2);
                 break;
@@ -153,7 +158,9 @@ public class NewJFrame extends javax.swing.JFrame {
         }
                 txtNumeradorTres.setText(""+f3.getNumerador());
                 txtDenominadorTres.setText(""+f3.getDenominador());
-    
+        }catch(DenominadorCeroException k){
+            JOptionPane.showMessageDialog(null, k.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     
 
     }//GEN-LAST:event_cmdCalcularActionPerformed
