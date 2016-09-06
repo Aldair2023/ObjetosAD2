@@ -18,6 +18,9 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() {
         initComponents();
+        txtNumeradorUno.requestFocusInWindow();
+        this.setLocationRelativeTo(this);
+        
     }
 
     /**
@@ -54,7 +57,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial", 2, 36)); // NOI18N
         jLabel2.setText("Operaciones con Fraccionario");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 520, 90));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 520, 90));
 
         txtDenominadorTres.setEditable(false);
         getContentPane().add(txtDenominadorTres, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 50, 80));
@@ -86,6 +89,11 @@ public class NewJFrame extends javax.swing.JFrame {
         cmdLimpiar.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
         cmdLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         cmdLimpiar.setText("Limpiar");
+        cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLimpiarActionPerformed(evt);
+            }
+        });
         getContentPane().add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 130, 60));
 
         cmdCalcular.setBackground(new java.awt.Color(0, 0, 153));
@@ -114,7 +122,7 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         int op, n1, d1, n2, d2;
-        Fraccionario f1, f2, f3;
+        Fraccionario f1, f2, f3=null;
 
         op = cmbOperaciones.getSelectedIndex();
         n1 = Integer.parseInt(txtNumeradorUno.getText());
@@ -129,9 +137,39 @@ public class NewJFrame extends javax.swing.JFrame {
             case 0:
                 f3 = f1.sumar(f2);
                 break;
-
+                
+            case 1:
+                f3 = f1.restar(f2);
+                break;
+                
+            case 2:
+                f3 = f1.multiplicar(f2);
+                break;
+                
+            case 3:
+                f3= f1.division(f2);
+                break;
+                
         }
+                txtNumeradorTres.setText(""+f3.getNumerador());
+                txtDenominadorTres.setText(""+f3.getDenominador());
+    
+    
+
     }//GEN-LAST:event_cmdCalcularActionPerformed
+
+    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
+        // TODO add your handling code here:
+        
+        txtNumeradorUno.setText("");
+        txtNumeradorDos.setText("");
+        txtDenominadorUno.setText("");
+        txtDenominadorDos.setText("");
+        txtNumeradorTres.setText("");
+        txtDenominadorTres.setText("");
+        txtNumeradorUno.requestFocusInWindow();
+        cmbOperaciones.setSelectedIndex(0);
+    }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
